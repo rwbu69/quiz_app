@@ -1,0 +1,147 @@
+/* =============== BASE LAYOUT STYLES =============== */
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 15px 0;
+  text-align: center;
+  border-top: 1px solid #dee2e6;
+  margin-top: auto;
+}
+
+/* =============== WEATHER STYLES =============== */
+.weather-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+}
+
+.today-highlight {
+  border: 2px solid #0d6efd;
+  background-color: #f8f9fa;
+}
+
+.temp-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.day-header {
+  background-color: #0d6efd;
+  color: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* =============== NAVBAR STYLES =============== */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* =============== LEADERBOARD STYLES =============== */
+.leaderboard-container {
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+.rank-1 {
+  background-color: #ffd700 !important;
+}
+
+.rank-2 {
+  background-color: #c0c0c0 !important;
+}
+
+.rank-3 {
+  background-color: #cd7f32 !important;
+}
+
+.current-user {
+  font-weight: bold;
+  background-color: #e6f7ff !important;
+}
+
+/* =============== AUTH STYLES =============== */
+.auth-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* =============== RESULT STYLES =============== */
+.result-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.score-display {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #0d6efd;
+}
+
+/* =============== QUIZ STYLES =============== */
+.quiz-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.question-card {
+  margin-bottom: 25px;
+  padding: 20px;
+  border-left: 4px solid #0d6efd;
+}
+
+.timer-container {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* =============== FLASH MESSAGES =============== */
+.flash-messages {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 400px;
+}
+
+.alert {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  transition: all 0.5s ease-out;
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.alert.show {
+  transform: translateX(0);
+  opacity: 1;
+}
