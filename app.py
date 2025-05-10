@@ -50,7 +50,10 @@ def login():
         else:
             flash("Invalid username or password", "danger")
 
-    return render_template("login.html")
+    return render_template(
+        "login.html",
+        now=datetime.now(),
+    )
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -94,7 +97,10 @@ def register():
         flash("Pendaftaran berhasil! Silakan login", "success")
         return redirect(url_for("login"))
 
-    return render_template("register.html")
+    return render_template(
+        "register.html",
+        now=datetime.now(),
+    )
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -134,6 +140,7 @@ def dashboard():
         location=location,
         forecast=forecast_days,
         current_weather=weather_data["current"] if weather_data else None,
+        now=datetime.now(),
     )
 
 
@@ -216,7 +223,11 @@ def quiz():
         random.shuffle(options)
 
     return render_template(
-        "quiz.html", current_user=user, question=question, options=options
+        "quiz.html",
+        current_user=user,
+        question=question,
+        options=options,
+        now=datetime.now(),
     )
 
     # Acak urutan opsi jawaban untuk GET request
@@ -269,6 +280,7 @@ def quiz_result():
         total_questions=total_questions,
         rank=user_rank,
         total_players=total_players,
+        now=datetime.now(),
     )
 
 
@@ -288,7 +300,11 @@ def leaderboard():
             )
 
     return render_template(
-        "leaderboard.html", top_players=top_players, current_user_rank=current_user_rank
+        "leaderboard.html",
+        top_players=top_players,
+        current_user_rank=current_user_rank,
+        current_user=get_current_user(),
+        now=datetime.now(),
     )
 
 

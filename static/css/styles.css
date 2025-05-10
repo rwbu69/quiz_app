@@ -1,147 +1,436 @@
-/* =============== BASE LAYOUT STYLES =============== */
-html, body {
-  height: 100%;
+/* =============== COLOR SCHEME =============== */
+:root {
+  --light-cream: #F2EFE7;
+  --light-teal: #9ACBD0;
+  --teal: #48A6A7;
+  --dark-blue: #2973B2;
+  --text-dark: #333333;
+  --text-light: #5A5A5A;
+
+  /* Derived colors */
+  --primary: var(--dark-blue);
+  --primary-light: rgba(41, 115, 178, 0.1);
+  --secondary: var(--light-teal);
+  --gradient: linear-gradient(135deg, var(--light-teal) 0%, var(--dark-blue) 100%);
 }
 
+/* =============== BASE STYLES =============== */
 body {
-  display: flex;
-  flex-direction: column;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--gradient);
+  background-attachment: fixed;
   min-height: 100vh;
+  color: var(--text-dark);
 }
 
-.content {
-  flex: 1;
-}
-
-.footer {
-  background-color: #f8f9fa;
-  padding: 15px 0;
-  text-align: center;
-  border-top: 1px solid #dee2e6;
-  margin-top: auto;
-}
-
-/* =============== WEATHER STYLES =============== */
-.weather-card {
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-
-.weather-card:hover {
-  transform: translateY(-5px);
-}
-
-.today-highlight {
-  border: 2px solid #0d6efd;
-  background-color: #f8f9fa;
-}
-
-.temp-display {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.day-header {
-  background-color: #0d6efd;
-  color: white;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
-
-/* =============== NAVBAR STYLES =============== */
-.navbar-brand {
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-/* =============== LEADERBOARD STYLES =============== */
-.leaderboard-container {
-  max-width: 800px;
-  margin: 30px auto;
-}
-
-.rank-1 {
-  background-color: #ffd700 !important;
-}
-
-.rank-2 {
-  background-color: #c0c0c0 !important;
-}
-
-.rank-3 {
-  background-color: #cd7f32 !important;
-}
-
-.current-user {
-  font-weight: bold;
-  background-color: #e6f7ff !important;
+.bg-gradient {
+  background: var(--gradient);
 }
 
 /* =============== AUTH STYLES =============== */
 .auth-container {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* =============== RESULT STYLES =============== */
-.result-container {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+.bg-white-translucent {
+  background: rgba(255, 255, 255, 0.9);
 }
 
-.score-display {
-  font-size: 5rem;
+.form-control.bg-white-translucent {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.form-control.bg-white-translucent:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 0.25rem rgba(72, 166, 167, 0.25);
+}
+
+.input-group-text {
+  transition: all 0.3s ease;
+}
+
+.input-group:focus-within .input-group-text {
+  background-color: var(--dark-blue) !important;
+}
+
+.text-light-teal {
+  color: var(--light-teal);
+}
+
+/* Password toggle button */
+.btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--light-teal);
+  transition: all 0.3s ease;
+
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-dark);
+}
+
+
+
+/* =============== NAVBAR STYLES =============== */
+.navbar {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(41, 115, 178, 0.8) !important;
+  /* dark-blue with opacity */
+}
+
+.navbar-brand {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--light-cream) !important;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  color: var(--light-cream) !important;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 2px;
+  background-color: var(--light-teal);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* 
+.btn-outline-light {
+  border-color: rgba(242, 239, 231, 0.5);
+  color: var(--text-light);
+}
+
+.btn-outline-light:hover {
+  background-color: rgba(242, 239, 231, 0.1);
+} */
+
+/* =============== LEADERBOARD STYLES =============== */
+.leaderboard-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bg-white-translucent {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  color: #0d6efd;
+}
+
+/* Rank colors */
+.rank-1 {
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
+.rank-2 {
+  background-color: rgba(192, 192, 192, 0.1);
+}
+
+.rank-3 {
+  background-color: rgba(205, 127, 50, 0.1);
+}
+
+.current-user {
+  background-color: rgba(154, 203, 208, 0.3) !important;
+}
+
+/* Medal colors */
+.text-gold {
+  color: #FFD700;
+}
+
+.text-silver {
+  color: #C0C0C0;
+}
+
+.text-bronze {
+  color: #CD7F32;
+}
+
+/* Alert styling */
+.alert-teal {
+  background-color: rgba(72, 166, 167, 0.2);
+  border-left: 4px solid var(--teal);
+  color: var(--text-dark);
+}
+
+/* Text colors */
+.text-light-teal {
+  color: var(--light-teal);
+}
+
+/* =============== CARD STYLES =============== */
+.current-weather-card {
+  border-radius: 20px;
+  background: rgba(242, 239, 231, 0.9);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.current-weather-card:hover {
+  transform: translateY(-5px);
+}
+
+.forecast-card {
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  background: rgba(242, 239, 231, 0.95);
+}
+
+.forecast-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.bg-teal {
+  background-color: var(--teal) !important;
+}
+
+.highlight-card {
+  border: 2px solid var(--teal);
+}
+
+.highlight-card .card-header {
+  background-color: var(--dark-blue) !important;
+}
+
+/* =============== WEATHER ELEMENTS =============== */
+.weather-icon {
+  width: 70px;
+  height: 70px;
+}
+
+.weather-icon-lg {
+  width: 100px;
+  height: 100px;
+}
+
+.detail-item {
+  background: var(--primary-light);
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detail-item i {
+  color: var(--teal);
+  font-size: 1.2rem;
+}
+
+/* =============== SEARCH FORM =============== */
+.search-form {
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.search-form .form-control {
+  padding-left: 20px;
+  border-color: var(--light-teal);
+}
+
+.search-form .btn {
+  border-radius: 0 50px 50px 0;
+  background-color: var(--teal);
+  color: white;
+}
+
+.search-form .btn:hover {
+  background-color: var(--dark-blue);
+}
+
+/* =============== TEMPERATURE DISPLAY =============== */
+.temp-high {
+  color: var(--teal);
+  font-size: 1.2rem;
+}
+
+.temp-low {
+  color: var(--dark-blue);
+  font-size: 1.2rem;
 }
 
 /* =============== QUIZ STYLES =============== */
 .quiz-container {
   max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .question-card {
-  margin-bottom: 25px;
-  padding: 20px;
-  border-left: 4px solid #0d6efd;
+  transition: transform 0.3s ease;
 }
 
-.timer-container {
-  background: #f8f9fa;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 20px;
+.question-card:hover {
+  transform: translateY(-3px);
 }
 
-/* =============== FLASH MESSAGES =============== */
-.flash-messages {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  max-width: 400px;
+.bg-teal {
+  background-color: var(--teal);
+  border-color: var(--teal);
 }
 
-.alert {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-  transition: all 0.5s ease-out;
-  transform: translateX(100%);
-  opacity: 0;
+.btn-teal {
+  background-color: var(--teal);
+  color: white;
+  transition: all 0.3s ease;
 }
 
-.alert.show {
-  transform: translateX(0);
-  opacity: 1;
+.btn-teal:hover {
+  background-color: var(--dark-blue);
+  transform: translateY(-2px);
+}
+
+.bg-blur {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.form-check-input:checked {
+  background-color: var(--teal);
+  border-color: var(--teal);
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(72, 166, 167, 0.25);
+}
+
+/* =============== QUIZ RESULT STYLES =============== */
+.result-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.score-display {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.bg-teal-translucent {
+  background: rgba(72, 166, 167, 0.1);
+}
+
+.bg-light-teal-translucent {
+  background: rgba(154, 203, 208, 0.1);
+}
+
+.bg-white-translucent {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.text-teal {
+  color: var(--teal);
+}
+
+.text-dark-blue {
+  color: var(--dark-blue);
+}
+
+.btn-outline-teal {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.btn-outline-teal:hover {
+  background-color: var(--teal);
+  color: white;
+}
+
+.btn-outline-dark-blue {
+  border-color: var(--dark-blue);
+  color: var(--dark-blue);
+}
+
+.btn-outline-dark-blue:hover {
+  background-color: var(--dark-blue);
+  color: white;
+}
+
+
+/* =============== FOOTER STYLES =============== */
+.app-footer {
+  background-color: rgba(41, 115, 178, 0.8);
+  /* dark-blue with opacity */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(242, 239, 231, 0.1);
+  margin-top: auto;
+}
+
+.footer-text {
+  color: rgba(242, 239, 231, 0.8);
+  /* light-cream with opacity */
+  font-size: 0.9rem;
+}
+
+.developer-name {
+  color: var(--light-teal);
+  transition: color 0.3s ease;
+  font-weight: 500;
+}
+
+.developer-name:hover {
+  color: var(--light-cream);
+}
+
+/* =============== ANIMATIONS =============== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* =============== RESPONSIVE ADJUSTMENTS =============== */
+@media (max-width: 768px) {
+  .weather-details {
+    margin-top: 20px;
+  }
+
+  .forecast-card {
+    margin-bottom: 20px;
+  }
 }

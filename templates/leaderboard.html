@@ -3,71 +3,96 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Papan Peringkat</title>
+    <title>Papan Peringkat - WeatherID</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">My App</a>
-      </div>
-    </nav>
+  <body class="bg-gradient d-flex flex-column min-vh-100">
+    {% include 'components/navbar.html' %}
 
-    <div class="container leaderboard-container">
-      <h2 class="text-center mb-4">🏆 Papan Peringkat Kuis</h2>
+    <main class="container py-4 flex-grow-1 animate__animated animate__fadeIn">
+      <div class="leaderboard-container bg-blur p-4 rounded-4 shadow">
+        <div class="text-center mb-4">
+          <h1 class="fw-bold"><i class="bi bi-trophy-fill me-2"></i>Papan Peringkat</h1>
+          <p class="lead text-light-teal">Lihat peringkat pemain terbaik dalam kuis kami</p>
+        </div>
 
-      <div class="card">
-        <div class="card-body">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Peringkat</th>
-                <th>Nama Pemain</th>
-                <th>Total Skor</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for player in top_players %}
-                <tr class="{% if loop.index == 1 %}                                        
-                    rank-1
-                  {% elif loop.index == 2 %}            
-                    rank-2
-                  {% elif loop.index == 3 %}           
-                    rank-3
-                  {% endif %} 
-                                  {% if 'user_id' in session and player.id == session.user_id %}current-user{% endif %}">
-                  <td>{{ loop.index }}</td>
-                  <td>
-                    {{ player.username }}
-                    {% if 'user_id' in session and player.id == session.user_id %}
-                      <span class="badge bg-primary">Anda</span>
-                    {% endif %}
-                  </td>
-                  <td>{{ player.total_score }}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-
-          {% if current_user_rank %}
-            <div class="alert alert-info mt-3">
-              Peringkat Anda: <strong>#{{ current_user_rank }}</strong>
+        <div class="card border-0 rounded-3 overflow-hidden bg-white-translucent">
+          <div class="card-header bg-teal text-white py-3">
+            <h4 class="mb-0 fw-bold"><i class="bi bi-people-fill me-2"></i>Top Pemain</h4>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="bg-light-teal text-dark">
+                  <tr>
+                    <th class="ps-4">Peringkat</th>
+                    <th>Nama Pemain</th>
+                    <th class="text-end pe-4">Total Skor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for player in top_players %}
+                    <tr class="{% if loop.index == 1 %}rank-1
+                              {% elif loop.index == 2 %}rank-2
+                              {% elif loop.index == 3 %}rank-3
+                              {% endif %}
+                              {% if 'user_id' in session and player.id == session.user_id %}current-user{% endif %}">
+                      <td class="ps-4 fw-bold">
+                        {% if loop.index == 1 %}
+                          <i class="bi bi-trophy-fill text-gold me-2"></i>
+                        {% elif loop.index == 2 %}
+                          <i class="bi bi-trophy-fill text-silver me-2"></i>
+                        {% elif loop.index == 3 %}
+                          <i class="bi bi-trophy-fill text-bronze me-2"></i>
+                        {% endif %}
+                        {{ loop.index }}
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="avatar-circle bg-dark-blue text-white me-3">{{ player.username.0|upper }}</div>
+                          <div>
+                            {{ player.username }}
+                            {% if 'user_id' in session and player.id == session.user_id %}
+                              <span class="badge bg-teal ms-2">Anda</span>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-end pe-4 fw-bold">{{ player.total_score }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
-          {% endif %}
+          </div>
+        </div>
+
+        {% if current_user_rank %}
+          <div class="alert alert-teal mt-4 d-flex align-items-center">
+            <i class="bi bi-info-circle-fill me-2"></i>
+            <div>
+              <strong>Peringkat Anda:</strong> #{{ current_user_rank }}
+              {% if current_user_rank > 3 %}
+                <span class="ms-2">🎯 Butuh {{ top_players.2.total_score - current_user_score + 1 }} poin lagi untuk masuk top 3!</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="d-flex justify-content-center gap-3 mt-4">
+          <a href="{{ url_for('quiz') }}" class="btn btn-teal btn-lg px-4">
+            <i class="bi bi-play-fill me-2"></i> Main Lagi
+          </a>
+          <a href="{{ url_for('dashboard') }}" class="btn btn-outline-light btn-lg px-4">
+            <i class="bi bi-arrow-left me-2"></i> Kembali
+          </a>
         </div>
       </div>
+    </main>
 
-      <div class="text-center mt-3">
-        <a href="{{ url_for('quiz') }}" class="btn btn-primary">Mainkan Kuis</a>
-        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Kembali</a>
-      </div>
-    </div>
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted">Dikembangkan oleh <strong>rwbu</strong></span>
-      </div>
-    </footer>
+    {% include 'components/footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
